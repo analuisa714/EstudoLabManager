@@ -34,7 +34,6 @@ class LabRepository
         connection.Open();
 
         connection.Execute("INSERT INTO Lab VALUES(@Id, @Number, @Name, @Block)", lab);
-        connection.Close();
     }
 
     public void Delete(int id)
@@ -44,7 +43,6 @@ class LabRepository
 
         //executa na tabela a deleção do computador com o id tal
         connection.Execute("DELETE FROM Lab WHERE id = @Id", new{Id = id});
-        connection.Close();
     }
 
     public Lab GetLabById(int id)
@@ -54,8 +52,7 @@ class LabRepository
 
         //Query pra quando só retorna UM valor
         var computer = connection.QuerySingle<Lab>("SELECT * FROM Lab WHERE id = @Id", new {Id = id});
-
-        connection.Close();
+        
         return computer;
     }
 
